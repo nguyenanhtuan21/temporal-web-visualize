@@ -69,6 +69,34 @@ Giao diện người dùng được xây dựng bằng React + Vite + React Flow
     ```
     ✅ Truy cập ứng dụng tại `http://localhost:5173`.
 
+### Phân hệ 3: Chạy bằng Docker (Khuyên dùng)
+
+Bạn có thể chạy toàn bộ ứng dụng (cả Client và Server) chỉ với 1 lệnh Docker.
+
+1.  **Build Image:**
+    ```bash
+    docker build -t temporal-flow-app .
+    ```
+
+2.  **Chạy Container:**
+
+    *   **Mac/Windows:**
+        ```bash
+        docker run -p 7531:7531 \
+          -e TEMPORAL_ENDPOINT=host.docker.internal:8080 \
+          temporal-flow-app
+        ```
+
+    *   **Linux:** (Cần thêm cờ `--add-host`)
+        ```bash
+        docker run -p 7531:7531 \
+          --add-host=host.docker.internal:host-gateway \
+          -e TEMPORAL_ENDPOINT=host.docker.internal:8080 \
+          temporal-flow-app
+        ```
+
+    ✅ Truy cập ứng dụng tại `http://localhost:7531`.
+
 ## 📖 Hướng dẫn sử dụng
 
 1.  **Truy cập**: Vào `http://localhost:5173`.

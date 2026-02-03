@@ -112,6 +112,15 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+// Serve static files from the public folder
+import path from "path";
+app.use(express.static(path.join(__dirname, "../public")));
+
+// Handle SPA routing: serve index.html for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

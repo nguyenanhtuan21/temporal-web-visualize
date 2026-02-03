@@ -19,7 +19,13 @@ export default class TemporalService {
           "Temporal Endpoint is required - set TEMPORAL_ENDPOINT envvar"
         );
       }
-      if (temporalEndpoint.includes("localhost")) {
+      // Check if it's localhost, host.docker.internal, or an IP address
+      if (
+        temporalEndpoint.includes("localhost") ||
+        temporalEndpoint.includes("host.docker.internal") ||
+        temporalEndpoint.includes("127.0.0.1") ||
+        /^\d/.test(temporalEndpoint) // Basic check for IP address start
+      ) {
         this.endpoint = `http://${temporalEndpoint}`;
       } else {
         this.endpoint = `https://${temporalEndpoint}.web.tmprl.cloud`;
