@@ -1,6 +1,15 @@
+
 import type { HistoryEvent, ListWorkflowExecutionsResponse, WorkflowFullData } from "../types/schema";
 
-const API_BASE_URL = "http://localhost:7531";
+declare global {
+    interface Window {
+        env: {
+            API_BASE_URL: string;
+        };
+    }
+}
+
+const API_BASE_URL = window.env?.API_BASE_URL ?? import.meta.env.VITE_API_BASE_URL ?? "http://localhost:7531";
 
 export async function searchWorkflows(
     query: string,

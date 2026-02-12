@@ -7,6 +7,8 @@ const PORT = 7531; // Uncommon port number
 const whitelistedOrigins = [
   "http://localhost:5173",
   "https://itaisoudry.github.io",
+  "http://192.168.11.202:5173",
+  "http://192.168.11.202:7531"
 ];
 
 const app = express();
@@ -106,6 +108,12 @@ app.get("/search", async (req: Request, res: Response) => {
       error: "Failed to search workflows",
     });
   }
+});
+
+
+app.get("/config.js", (req, res) => {
+  res.setHeader("Content-Type", "application/javascript");
+  res.send(`window.env = { API_BASE_URL: "${process.env.API_BASE_URL || "http://localhost:7531"}" };`);
 });
 
 app.get("/health", (req, res) => {

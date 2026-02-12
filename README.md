@@ -84,6 +84,7 @@ Bạn có thể chạy toàn bộ ứng dụng (cả Client và Server) chỉ v�
         ```bash
         docker run -p 7531:7531 \
           -e TEMPORAL_ENDPOINT=host.docker.internal:8080 \
+          -e API_BASE_URL=http://localhost:7531 \
           temporal-flow-app
         ```
 
@@ -92,10 +93,15 @@ Bạn có thể chạy toàn bộ ứng dụng (cả Client và Server) chỉ v�
         docker run -p 7531:7531 \
           --add-host=host.docker.internal:host-gateway \
           -e TEMPORAL_ENDPOINT=host.docker.internal:8080 \
+          -e API_BASE_URL=http://localhost:7531 \
           temporal-flow-app
         ```
 
     ✅ Truy cập ứng dụng tại `http://localhost:7531`.
+
+    **Lưu ý:**
+    - `TEMPORAL_ENDPOINT`: Địa chỉ Temporal Web UI (mặc định `localhost:8080`).
+    - `API_BASE_URL`: Địa chỉ của Backend Proxy mà Client sẽ gọi (mặc định `http://localhost:7531`). Khi chạy Docker, giá trị này được inject vào Client lúc khởi động (Runtime Configuration).
 
 ## 📖 Hướng dẫn sử dụng
 
