@@ -1,84 +1,84 @@
 # Temporal Flow
 
-Ứng dụng web hiện đại giúp trực quan hóa (visualize) và theo dõi các workflow của Temporal dưới dạng biểu đồ logic (Logical Graph) và bảng lịch sử chi tiết.
+A modern web application to visualize and track Temporal workflows as Logical Graphs and detailed History Tables.
 
 <div align="center">
   <img src="/client/public/vite.svg" alt="Logo" width="80" height="80" />
 </div>
 
-## 🌟 Tính năng nổi bật
+## 🌟 Key Features
 
--   **Dashboard Hiện đại**: Tìm kiếm thông minh và xem danh sách Workflow với trạng thái trực quan.
--   **Logical Graph (Biểu đồ Logic)**: 
-    -   Thay vì hiển thị hàng trăm event rời rạc, ứng dụng gom nhóm chúng thành các **Logical Node** (Workflow, Activity, Timer).
-    -   Dễ dàng hình dung luồng đi của dữ liệu và thứ tự thực thi.
-    -   Hiển thị thông tin quan trọng: Duration, Status, Queue Name ngay trên Node.
--   **History Table**: Chế độ xem bảng chi tiết cho những ai muốn debug sâu từng sự kiện.
--   **Node Details**: Sidebar hiển thị JSON Raw của input/output/result khi click vào bất kỳ node nào.
--   **Chrome Extension**: Tích hợp nút bấm "Open in Flow" ngay trên giao diện Temporal Cloud/Local.
+-   **Modern Dashboard**: Smart search and view Workflow lists with visual statuses.
+-   **Logical Graph**: 
+    -   Instead of displaying hundreds of disjointed events, the app groups them into **Logical Nodes** (Workflow, Activity, Timer).
+    -   Easily visualize data flow and execution order.
+    -   Display important information: Duration, Status, Queue Name right on the Node.
+-   **History Table**: Detailed table view for those who want to debug events in depth.
+-   **Node Details**: Sidebar displaying Raw JSON of input/output/result when clicking on any node.
+-   **Chrome Extension**: Integrated "Open in Flow" button right on the Temporal Cloud/Local interface.
 
-## 🛠 Yêu cầu hệ thống
+## 🛠 System Requirements
 
--   **Node.js**: v18 trở lên.
--   **Temporal Server**: Đang chạy (Localhost hoặc Cloud).
--   **Temporal Web UI**: Để server có thể fetch dữ liệu API (cần truy cập được port HTTP, ví dụ 8080 hoặc 8233).
+-   **Node.js**: v18 or higher.
+-   **Temporal Server**: Running (Localhost or Cloud).
+-   **Temporal Web UI**: So the server can fetch API data (must be accessible via HTTP port, e.g., 8080 or 8233).
 
-## 🚀 Hướng dẫn Cài đặt & Chạy
+## 🚀 Installation & Running
 
-Hệ thống gồm 2 thành phần: **Server** (Backend Proxy) và **Client** (Frontend React). Bạn cần chạy song song cả hai.
+The system consists of 2 components: **Server** (Backend Proxy) and **Client** (Frontend React). You need to run both in parallel.
 
-### Phân hệ 1: Server (Backend)
+### Component 1: Server (Backend)
 
-Server này đóng vai trò Proxy để gọi Temporal API và xử lý CORS.
+This server acts as a Proxy to call Temporal API and handle CORS.
 
-1.  Di chuyển vào thư mục server:
+1.  Navigate to the server directory:
     ```bash
     cd server
     ```
-2.  Cài đặt dependencies:
+2.  Install dependencies:
     ```bash
     npm install
     ```
-3.  Cấu hình kết nối:
-    Mở file `.env` (hoặc tạo mới) và cấu hình địa chỉ Temporal Web UI của bạn (Lưu ý: đây là port Web HTTP, không phải port GRPC 7233):
+3.  Configure connection:
+    Open `.env` file (or create new) and configure your Temporal Web UI address (Note: this is the HTTP Web port, not GRPC port 7233):
     ```env
-    # Ví dụ nếu Temporal Web chạy ở localhost:8080
+    # Example if Temporal Web runs at localhost:8080
     TEMPORAL_ENDPOINT=localhost:8080
     ```
-4.  Chạy Server:
+4.  Run Server:
     ```bash
     npm run dev
     ```
-    ✅ Server sẽ lắng nghe tại `http://localhost:7531`.
+    ✅ Server will listen at `http://localhost:7531`.
 
-### Phân hệ 2: Client (Frontend)
+### Component 2: Client (Frontend)
 
-Giao diện người dùng được xây dựng bằng React + Vite + React Flow.
+User interface built with React + Vite + React Flow.
 
-1.  Mở terminal mới, di chuyển vào thư mục client:
+1.  Open a new terminal, navigate to client directory:
     ```bash
     cd client
     ```
-2.  Cài đặt dependencies:
+2.  Install dependencies:
     ```bash
     npm install
     ```
-3.  Chạy ứng dụng:
+3.  Run application:
     ```bash
     npm run dev
     ```
-    ✅ Truy cập ứng dụng tại `http://localhost:5173`.
+    ✅ Access application at `http://localhost:5173`.
 
-### Phân hệ 3: Chạy bằng Docker (Khuyên dùng)
+### Component 3: Run with Docker (Recommended)
 
-Bạn có thể chạy toàn bộ ứng dụng (cả Client và Server) chỉ với 1 lệnh Docker.
+You can run the entire application (both Client and Server) with just 1 Docker command.
 
 1.  **Build Image:**
     ```bash
     docker build -t temporal-flow-app .
     ```
 
-2.  **Chạy Container:**
+2.  **Run Container:**
 
     *   **Mac/Windows:**
         ```bash
@@ -88,7 +88,7 @@ Bạn có thể chạy toàn bộ ứng dụng (cả Client và Server) chỉ v�
           temporal-flow-app
         ```
 
-    *   **Linux:** (Cần thêm cờ `--add-host`)
+    *   **Linux:** (Need `--add-host` flag)
         ```bash
         docker run -p 7531:7531 \
           --add-host=host.docker.internal:host-gateway \
@@ -97,35 +97,35 @@ Bạn có thể chạy toàn bộ ứng dụng (cả Client và Server) chỉ v�
           temporal-flow-app
         ```
 
-    ✅ Truy cập ứng dụng tại `http://localhost:7531`.
+    ✅ Access application at `http://localhost:7531`.
 
-    **Lưu ý:**
-    - `TEMPORAL_ENDPOINT`: Địa chỉ Temporal Web UI (mặc định `localhost:8080`).
-    - `API_BASE_URL`: Địa chỉ của Backend Proxy mà Client sẽ gọi (mặc định `http://localhost:7531`). Khi chạy Docker, giá trị này được inject vào Client lúc khởi động (Runtime Configuration).
+    **Note:**
+    - `TEMPORAL_ENDPOINT`: Temporal Web UI address (default `localhost:8080`).
+    - `API_BASE_URL`: Backend Proxy address that Client will call (default `http://localhost:7531`). When running Docker, this value is injected into Client at startup (Runtime Configuration).
 
-## 📖 Hướng dẫn sử dụng
+## 📖 Usage Guide
 
-1.  **Truy cập**: Vào `http://localhost:5173`.
-2.  **Tìm kiếm**:
-    -   Nhập `WorkflowId` vào ô tìm kiếm.
-    -   Hoặc để trống và nhấn **Search** để lấy danh sách các workflow gần nhất.
-3.  **Xem chi tiết**:
-    -   Click vào một dòng Workflow để mở trang chi tiết.
-    -   Mặc định bạn sẽ thấy **Graph View**.
-    -   Sử dụng nút Toggle góc trên phải để chuyển sang **History Table**.
+1.  **Access**: Go to `http://localhost:5173`.
+2.  **Search**:
+    -   Enter `WorkflowId` in the search box.
+    -   Or leave empty and press **Search** to get a list of recent workflows.
+3.  **View Details**:
+    -   Click on a Workflow row to open detail page.
+    -   Default view is **Graph View**.
+    -   Use Toggle button at top right to switch to **History Table**.
 4.  **Debug**:
-    -   Click vào một Node trên biểu đồ để xem Input/Output/Result trong Sidebar bên phải.
+    -   Click on a Node on the graph to view Input/Output/Result in the right Sidebar.
 
-## 🧩 Cài đặt Chrome Extension (Tùy chọn)
+## 🧩 Install Chrome Extension (Optional)
 
-Giúp mở nhanh Workflow đang xem trên Temporal Web UI sang Temporal Flow.
+Helps quickly open Workflow being viewed on Temporal Web UI in Temporal Flow.
 
-1.  Mở Chrome, truy cập `chrome://extensions`.
-2.  Bật chế độ **Developer mode** (góc trên phải).
-3.  Bấm **Load unpacked** và chọn thư mục `chrome-extension` trong source code này.
-4.  Bây giờ khi vào trang chi tiết workflow trên Temporal Web, bạn sẽ thấy nút **"Flow View"**.
+1.  Open Chrome, go to `chrome://extensions`.
+2.  Enable **Developer mode** (top right).
+3.  Click **Load unpacked** and select `chrome-extension` directory in this source code.
+4.  Now when visiting a workflow detail page on Temporal Web, you will see a **"Flow View"** button.
 
-## 🏗 Công nghệ sử dụng
+## 🏗 Technologies Used
 
 -   **Frontend**: React, TypeScript, Vite.
 -   **UI/UX**: TailwindCSS, Shadcn/UI, Lucide Icons.

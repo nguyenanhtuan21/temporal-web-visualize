@@ -42,22 +42,18 @@ The Temporal Flow API Server is a dedicated service that interfaces with Tempora
    npm install
    ```
 
-3. **Configure environment**
+4. **Configure environment**
    Create a `.env` file in the root directory:
 
    ```env
-   TEMPORAL_API_KEY=<your-temporal-api-key>
    TEMPORAL_ENDPOINT=<your-temporal-endpoint>
    ```
 
    > **Note**:
    >
-   > - Find your `TEMPORAL_API_KEY` in Temporal Cloud account settings
-   > - `TEMPORAL_ENDPOINT` should be your namespace ID (e.g., "temporal-flow.zn0bd")
-   > - Omit "https://" and ".web.tmprl.cloud" from the endpoint
-   > - For local development, you can use localhost (some features may be limited)
+   > - `TEMPORAL_ENDPOINT` should be your Temporal Web UI address (e.g., "http://localhost:8080")
 
-4. **Start the server**
+5. **Start the server**
    ```bash
    npm run dev
    ```
@@ -69,7 +65,6 @@ The Temporal Flow API Server is a dedicated service that interfaces with Tempora
 
 ```bash
 docker run -p 7531:7531 \
-  -e TEMPORAL_API_KEY=your-api-key \
   -e TEMPORAL_ENDPOINT=your-endpoint \
   ghcr.io/itaisoudry/temporal-flow-web:main
 ```
@@ -87,13 +82,7 @@ docker run -p 7531:7531 \
    ```bash
    # Using environment variables
    docker run -p 7531:7531 \
-     -e TEMPORAL_API_KEY=your-api-key \
      -e TEMPORAL_ENDPOINT=your-endpoint \
-     temporal-flow-server
-
-   # Using .env file
-   docker run -p 7531:7531 \
-     --env-file .env \
      temporal-flow-server
    ```
 
@@ -121,7 +110,7 @@ curl "http://localhost:7531/workflow?namespace=<your-namespace>&id=<your-workflo
 
 #### Response
 
-Returns a JSON array of workflow events in Temporal API format.
+Returns a JSON array of workflow events.
 
 ### Get Workflow Data
 
@@ -210,7 +199,6 @@ The API supports Cross-Origin Resource Sharing (CORS) for the following origins:
 ## Security
 
 - 🔐 Never commit `.env` files to version control
-- 🔑 Rotate API keys regularly
 - 🛡️ Use environment variables for sensitive data
 - 🔒 Implement proper access controls in production
 
@@ -218,9 +206,8 @@ The API supports Cross-Origin Resource Sharing (CORS) for the following origins:
 
 | Issue                           | Solution                                               |
 | ------------------------------- | ------------------------------------------------------ |
-| "Temporal API Key is required"  | Verify `.env` file contains correct `TEMPORAL_API_KEY` |
 | "Temporal Endpoint is required" | Check `TEMPORAL_ENDPOINT` configuration                |
-| Connection errors               | Validate API key permissions and endpoint accuracy     |
+| Connection errors               | Validate endpoint accuracy                             |
 
 ## Contributing
 
